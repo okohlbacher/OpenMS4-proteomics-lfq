@@ -1,0 +1,26 @@
+{
+  "original_core_revision": "4fdec46b205459b92e7d3b9e56df5d8e912d5c85",
+  "original_topp_revision": "582535805581f2bdf4f3871d6802a0b45a3abe36",
+  "transfers": [
+    {
+      "original": "packages/topp/src/ProteomicsLFQ.cpp",
+      "destination": "src/ProteomicsLFQ.cpp",
+      "sha256": "85c2b98012292a631e3a016393ff6ef6eb3c1e8d95a9f06c586f24d80de11176"
+    },
+    {
+      "original": "packages/core/src/openms/include/OpenMS/ANALYSIS/QUANTITATION/DDAWorkflowCommons.h",
+      "destination": "include/OpenMS/ANALYSIS/QUANTITATION/DDAWorkflowCommons.h",
+      "sha256": "27277459ea9ec2de334904ecab75c20340bd9b578b7dd185aa9e87b4c7d36fe7"
+    },
+    {
+      "original": "packages/core/src/openms/source/ANALYSIS/QUANTITATION/DDAWorkflowCommons.cpp",
+      "destination": "source/ANALYSIS/QUANTITATION/DDAWorkflowCommons.cpp",
+      "sha256": "0cee58f7c33b747458dbfad56217375b1ee9969a1820199cb7232f2d0566ed77"
+    },
+    {
+      "original": "packages/core/src/tests/class_tests/openms/source/DDAWorkflowCommons_test.cpp",
+      "destination": "tests/source/DDAWorkflowCommons_test.cpp",
+      "sha256": "4a68b70498854329e80a37b333711b3b1ef3003c935d24c5eb32a3237d6e9d7e"
+    }
+  ]
+}

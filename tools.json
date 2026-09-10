@@ -1,0 +1,10 @@
+{
+  "package": "OpenMSProteomicsLFQ",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "ProteomicsLFQ",
+      "category": "Quantitation"
+    }
+  ]
+}
