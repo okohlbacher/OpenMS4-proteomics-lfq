@@ -37,5 +37,6 @@ jobs:
           brew tap okohlbacher/openms4-core https://github.com/okohlbacher/OpenMS4-core
           brew tap okohlbacher/openms4-proteomics-lfq https://github.com/okohlbacher/OpenMS4-proteomics-lfq
           brew install --cask okohlbacher/openms4-proteomics-lfq/openms4-proteomics-lfq
-          ProteomicsLFQ --help
+          ProteomicsLFQ -write_ini "$RUNNER_TEMP/ProteomicsLFQ.ini"
+          test -s "$RUNNER_TEMP/ProteomicsLFQ.ini"
           brew uninstall --cask openms4-proteomics-lfq
