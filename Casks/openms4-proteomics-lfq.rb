@@ -1,9 +1,9 @@
 cask "openms4-proteomics-lfq" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.0.0-ci.2,cf12fe9163e3"
-  sha256 arm:   "37e52eb0072cd14b9e249885eaa34c8475178ec5374b14661aa01e0b987a5b4c",
-         intel: "c6a91452de569def1850cabf9c135b09203c7164510bebb7bd1315ddf819d65f"
+  version "1.0.0-ci.3,953ccc18ab40"
+  sha256 arm:   "b0432720671d912d399ecf00b3a99d5df39895c480bca02e5814417535ea977c",
+         intel: "12d2e704633193bc64fd5203a1ee400bdb02dfd63c72d9e92a4a8808fba78616"
 
   url "https://github.com/okohlbacher/OpenMS4-proteomics-lfq/releases/download/" \
       "proteomics-lfq-v#{version.csv.first}/OpenMS4-proteomics-lfq-macos-#{arch}-Homebrew-#{version.csv.second}.tar.gz"
@@ -11,14 +11,22 @@ cask "openms4-proteomics-lfq" do
   desc "Command-line mass-spectrometry tools built against the OpenMS Core SDK"
   homepage "https://github.com/okohlbacher/OpenMS4-proteomics-lfq"
 
-  disable! date:    "2026-09-14",
-           because: "was built against openms4-core 4.0.0-ci.2, and the tap now serves a binary-incompatible newer Core"
-
   depends_on formula: "okohlbacher/openms4-core/openms4-core"
   depends_on macos: :sequoia
 
   payload = "OpenMS4-proteomics-lfq-macos-#{arch}-Homebrew-#{version.csv.second}"
   binary "#{payload}/bin/ProteomicsLFQ"
+
+  # libOpenMS has no versioned name, so a payload only runs with the Core it was built against.
+  preflight do
+    config = "#{HOMEBREW_PREFIX}/opt/openms4-core/lib/cmake/OpenMS/OpenMSConfig.cmake"
+    core = File.exist?(config) ? File.read(config)[/set\(OpenMS_SOURCE_REVISION "([0-9a-f]{40})"\)/, 1] : nil
+    next if core == "ac41cc177023e24a8fbc711a6ce9010187c54c44"
+
+    raise Cask::CaskError, "openms4-proteomics-lfq #{version.csv.first} was built against openms4-core ac41cc177023, " \
+                           "but the installed openms4-core is #{core&.slice(0, 12) || "unknown"}. " \
+                           "Install the openms4-proteomics-lfq release built for the installed Core."
+  end
 
   postflight_steps do
     run "/usr/bin/xattr",
