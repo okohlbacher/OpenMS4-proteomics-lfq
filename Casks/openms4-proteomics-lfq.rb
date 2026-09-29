@@ -1,9 +1,9 @@
 cask "openms4-proteomics-lfq" do
   arch arm: "arm64", intel: "x64"
 
-  version "1.0.0-ci.6,7cdd81d601f4"
-  sha256 arm:   "8164dad40b3b72c3608de836b38936339e5a95d89b5a136eb68be72cd15931ee",
-         intel: "a1192d07f880446bd2f963905b5acab155aa7a95557f4c8afa8e8bbcbede213a"
+  version "1.0.0-ci.7,ba76073b658b"
+  sha256 arm:   "533e7664e7870feac5ebbd41ad81269516224c1fd54660c3e85add5f29f98439",
+         intel: "79be5a32edaa20104ae96cc279d994035fb22bae50cc7ba372a444722b95a75b"
 
   url "https://github.com/okohlbacher/OpenMS4-proteomics-lfq/releases/download/" \
       "proteomics-lfq-v#{version.csv.first}/OpenMS4-proteomics-lfq-macos-#{arch}-Homebrew-#{version.csv.second}.tar.gz"
@@ -21,9 +21,9 @@ cask "openms4-proteomics-lfq" do
   preflight do
     config = "#{HOMEBREW_PREFIX}/opt/openms4-core/lib/cmake/OpenMS/OpenMSConfig.cmake"
     core = File.exist?(config) ? File.read(config)[/set\(OpenMS_SOURCE_REVISION "([0-9a-f]{40})"\)/, 1] : nil
-    next if core == "7d90cec8718d28518527acc10b495550f106de26"
+    next if core == "83ce20da78337b0b329f5c634e52226585e4788d"
 
-    raise Cask::CaskError, "openms4-proteomics-lfq #{version.csv.first} was built against openms4-core 7d90cec8718d, " \
+    raise Cask::CaskError, "openms4-proteomics-lfq #{version.csv.first} was built against openms4-core 83ce20da7833, " \
                            "but the installed openms4-core is #{core&.slice(0, 12) || "unknown"}. " \
                            "Install the openms4-proteomics-lfq release built for the installed Core."
   end
